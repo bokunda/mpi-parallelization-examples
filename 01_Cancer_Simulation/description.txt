@@ -1,0 +1,19 @@
+Create a cell structure, which contains:
+    • type:
+        - 0: cancer
+        - 1: medecine
+        - 2: tissue
+
+    • strength:
+        - if the type is cancer, this number represents the strength of the cancer from the interval [0, 100];
+        - if the type is a medecine, the number represents the strength of the medecine from the interval [1, 20];
+        - who is the tissue type, the number represents the health condition of the tissue from the interval [0, 10000].
+
+The medecine affects the cells around it by reducing the strength of all cancer cells (by medecine cell health) in the environment at each step.
+Also, cancer affects all adjacent fields where the tissue is located, by reducing it
+tissue health for its strength. If a cell with a medecine around it does not have a single cancer cell, it changes type
+into the tissue. If the strength of the cancer decreases to 0, it becomes tissue. Cancer does not affect the cell with the medecine.
+An experiment is being performed. In the matrix - shaped field of dimension n × m, cells were arranged (initially
+randomly assigned, with the probability that the cell is cancer 2%, the medecine 18%, and the tissue 80%). After B
+steps, print the number of cancer cells, as well as information about the strongest cancer if it is left (create a reduction operation).
+Make a simulation of this experiment.
