@@ -122,7 +122,7 @@ int main(int argc, char **argv)
     MPI_Datatype mycelltype;
 
     int count = 1;
-    int lengths[1] = { 1 };
+    int lengths[1] = { 2 };
     MPI_Aint displacements[1] = { 0 };
     MPI_Datatype types[1] = { MPI_INT };
 
@@ -135,17 +135,21 @@ int main(int argc, char **argv)
 
     // Data prepare
     cell **matrix;
+    matrix = allocateMatrix(M, N);
 
     if (rank == 0)
     {
         // Allocate matrix
-        matrix = allocateMatrix(M, N);
         // Set matrix
         matrix = setMatrix(matrix, M, N);
-        printMatrix(matrix, M, N, PRINT_TYPE);
     }
 
-    // TODO: Sync matrix
+    // Sync matrix
+    for (int i = 0; i < M; i++)
+    {
+        MPI_Bcast(matrix[i], N, mycelltype, 0, MPI_COMM_WORLD);
+    }
+
     // TODO: Define submatrix for each process
     
     // Simulate
