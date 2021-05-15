@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <mpi.h>
 
 #define CANCER 0
@@ -244,6 +245,9 @@ int main(int argc, char **argv)
     // Get process rank and total number of processes (size)
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
+    
+    // Random
+    srand(time(0) * rank);
 
     // Create and commit cell structure
     MPI_Datatype mycelltype;
